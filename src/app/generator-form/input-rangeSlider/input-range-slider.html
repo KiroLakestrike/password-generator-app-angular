@@ -1,0 +1,23 @@
+<div class="range-container">
+  <label>
+    @if (rangeSlider().label.location === 'before') {
+      {{ rangeSlider().label.text }}
+    }
+
+    <input
+      type="range"
+      [name]="rangeSlider().name"
+      [id]="rangeSlider().id"
+      [min]="rangeSlider().min"
+      [max]="rangeSlider().max"
+      [value]="length()"
+      (input)="onInput($event)"
+    />
+
+    @if (rangeSlider().label.location === 'after') {
+      {{ rangeSlider().label.text }}
+    }
+  </label>
+
+  <span id="length-display">{{ length() }}</span>
+</div>

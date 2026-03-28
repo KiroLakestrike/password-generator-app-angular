@@ -2,23 +2,6 @@
 @use '../../typography' as *;
 
 
-ul {
-    display: flex;
-    flex-direction:column;
-    gap: $spacer-8;
-    padding:0;
-    margin: $spacer-32 0;
-}
-
-li {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
-
-
-
 button {
     width: 100%;
     padding: $spacer-16 0;
@@ -35,21 +18,18 @@ button {
         background: $neutral-800;
         outline: $green-200 2px solid;
         color: $green-200;
-        
+
         svg {
         fill:$green-200;
     }
     }
 }
-
 .checkbox-container{
     display:flex;
     flex-direction:column;
     gap: $spacer-8;
     margin:$spacer-32 0;
 }
-
-
 .strength-container{
     padding:$spacer-16;
     background-color:$neutral-900;
@@ -57,20 +37,43 @@ button {
     justify-content: center;
     align-items: center;
     gap: $spacer-8;
+  margin-bottom: $spacer-16;
 
     .first {
-     margin-right:auto;   
+     margin-right:auto;
     }
 }
-
 .strength-bars-container {
     display:flex;
     flex-direction: row;
     gap:$spacer-8;
 }
-
 .bars {
     height: 1.75rem;
     width: 0.5rem;
-    border: 2px $white solid;
 }
+
+.white {
+  border: 2px $white solid;
+}
+
+.red {
+  background-color: $red-500;
+  border: 2px  $red-500 solid;
+}
+
+.orange {
+  background-color: $orange-400;
+  border: 2px $orange-400 solid;
+}
+
+.yellow {
+  background-color: $yellow-300;
+  border: 2px $white $yellow-300 solid;
+}
+
+.green {
+  background-color: $green-200;
+  border: 2px $green-200 solid;
+}
+

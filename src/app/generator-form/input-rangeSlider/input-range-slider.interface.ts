@@ -1,4 +1,4 @@
-export interface RangeSliderInterface {
+export interface InputRangeSliderInterface {
     label: {
         text:string;
         location:'before' | 'after';

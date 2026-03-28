@@ -1,5 +1,5 @@
-@use '../../colors' as *;
-@use '../../typography' as *;
+@use '../../../colors' as *;
+@use '../../../typography' as *;
 
 
 input[type="checkbox"] {
@@ -22,7 +22,7 @@ input[type="checkbox"]::before{
     height: 1.15rem;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    background: $green-200 url('../../../public/icon-check.svg') center center no-repeat;
+    background: $green-200 url('../../../../public/icon-check.svg') center center no-repeat;
     position:absolute;
     top:-2px;
     left:-2px;

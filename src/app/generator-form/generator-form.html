@@ -1,11 +1,15 @@
 <form>
-    <app-range-slider></app-range-slider>
+  <app-input-range-slider
+    [rangeSlider]="rangeSliderConfig"
+    [length]="passwordLength()"
+    (lengthChange)="onLengthChange($event)"
+  />
     <div class="checkbox-container">
 @for (checkbox of checkboxes; track trackByCheckboxId($index, checkbox)) {
-  <app-input-checkbox 
+  <app-input-checkbox
     [config]="checkbox"
     [checked]="getCheckedState(checkbox.name)()"
-    (change)="toggleCheckbox($event, checkbox.name)">
+    (checkedChange)="toggleCheckbox($event, checkbox.name)">
   </app-input-checkbox>
 }
 
@@ -14,7 +18,11 @@
   <span class="first">STRENGTH</span>
   <span></span>
   <div class="strength-bars-container">
-    <div class="bars" id="bar1"></div><div class="bars" id="bar2"></div><div class="bars" id="bar3"></div><div class="bars" id="bar4"></div></div>
+    <div class="bars red" id="bar1"></div>
+    <div class="bars white" id="bar2"></div>
+    <div class="bars white" id="bar3"></div>
+    <div class="bars white" id="bar4"></div>
+  </div>
 </div>
     <button type="submit" id="btn-generate">GENERATE <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/></svg></button>
 </form>
