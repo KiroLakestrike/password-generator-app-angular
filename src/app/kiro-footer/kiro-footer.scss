@@ -25,7 +25,8 @@ a:visited {
 .footer-container {
     display:flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    gap: $spacer-32;
 }
 
 

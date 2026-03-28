@@ -1,6 +1,14 @@
 @use '../../../colors' as *;
 @use '../../../typography' as *;
 
+label{
+  display:flex;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $spacer-16;
+}
 
 input[type="checkbox"] {
     appearance:none;
@@ -8,7 +16,6 @@ input[type="checkbox"] {
     width:1.15rem;
     height: 1.15rem;
     border: 2px solid $white;
-    transform: translateY(0.5rem);
     position:relative;
 
     &:hover {

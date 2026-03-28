@@ -1,4 +1,4 @@
-import { Component, output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { InputRangeSlider } from "./input-rangeSlider/input-range-slider";
 import { InputCheckbox } from './input-checkbox/input-checkbox';
 import { InputCheckboxInterface } from './input-checkbox/input-checkbox.interface'
@@ -10,10 +10,12 @@ import { InputRangeSliderInterface } from './input-rangeSlider/input-range-slide
   imports: [InputRangeSlider, InputCheckbox],
   templateUrl: './generator-form.html',
   styleUrl: './generator-form.scss',
+  standalone: true,
 })
 export class GeneratorForm {
+  passwordRating = input<'TOO WEAK!' | 'WEAK' | 'MEDIUM' | 'STRONG' | ''>('');
   // Range Slider
-  passwordLength = signal(12);
+  passwordLength = signal(10);
   passwordLengthChange = output<number>();
   rangeSliderConfig: InputRangeSliderInterface = {
     label: {
@@ -23,14 +25,13 @@ export class GeneratorForm {
     name: 'password-length',
     id: 'range-length',
     min: 0,
-    max: 24,
-    value: 12,
+    max: 20,
+    value: 10,
   };
 
   onLengthChange(value: number): void {
     this.passwordLength.set(value);
     this.passwordLengthChange.emit(value);
-    console.log('Slider-Wert geändert:', value);
   }
 
   // Checkboxes
@@ -47,22 +48,22 @@ export class GeneratorForm {
 
   // Checkbox Configuration
   allowUppercase: InputCheckboxInterface = {
-    label: { text: 'Include Uppercase Letters', location: 'after', },
+    label: { text: 'Include Uppercase Letters', location: 'after' },
     id: 'chk-upper',
     name: 'allow-uppercase',
   };
   allowLowercase: InputCheckboxInterface = {
-    label: { text: 'Include Lowercase Letters', location: 'after', },
+    label: { text: 'Include Lowercase Letters', location: 'after' },
     id: 'chk-lower',
     name: 'allow-lowercase',
   };
   allowNumbers: InputCheckboxInterface = {
-    label: { text: 'Include Numbers', location: 'after', },
+    label: { text: 'Include Numbers', location: 'after' },
     id: 'chk-numbers',
     name: 'allow-numbers',
   };
   allowSymbols: InputCheckboxInterface = {
-    label: { text: 'Include Symbols', location: 'after', },
+    label: { text: 'Include Symbols', location: 'after' },
     id: 'chk-symbols',
     name: 'allow-symbols',
   };
@@ -71,33 +72,45 @@ export class GeneratorForm {
   checkboxes = [this.allowUppercase, this.allowLowercase, this.allowNumbers, this.allowSymbols];
 
   // Signal Creation for the four checkboxes
-  allowUppercaseSelection = signal(false);
-  allowLowercaseSelection = signal(false);
-  allowNumberSelection = signal(false);
-  allowSymbolSelection = signal(false);
+  checkboxState = signal({
+    uppercase: false,
+    lowercase: false,
+    numbers: false,
+    symbols: false,
+  });
 
-  getCheckedState(name: string): Signal<boolean> {
+  // Method to retrieve the current state of a checkbox by name
+  getCheckedState(name: string): boolean {
     return (
       {
-        'allow-uppercase': this.allowUppercaseSelection,
-        'allow-lowercase': this.allowLowercaseSelection,
-        'allow-numbers': this.allowNumberSelection,
-        'allow-symbols': this.allowSymbolSelection,
-      }[name] ?? signal(false)
+        'allow-uppercase': this.checkboxState().uppercase,
+        'allow-lowercase': this.checkboxState().lowercase,
+        'allow-numbers': this.checkboxState().numbers,
+        'allow-symbols': this.checkboxState().symbols,
+      }[name] ?? false
     );
   }
 
+  // Method to toggle the state of a checkbox by name
   toggleCheckbox(checked: boolean, name: string) {
-    const state = this.getCheckedState(name) as WritableSignal<boolean>;
-    state.set(checked);
+    const current = this.checkboxState();
 
-    const currentState = {
-      uppercase: this.allowUppercaseSelection(),
-      lowercase: this.allowLowercaseSelection(),
-      numbers: this.allowNumberSelection(),
-      symbols: this.allowSymbolSelection(),
+    const nextState = {
+      ...current,
+      ...(name === 'allow-uppercase' ? { uppercase: checked } : {}),
+      ...(name === 'allow-lowercase' ? { lowercase: checked } : {}),
+      ...(name === 'allow-numbers' ? { numbers: checked } : {}),
+      ...(name === 'allow-symbols' ? { symbols: checked } : {}),
     };
 
-    this.checkboxChange.emit(currentState);
+    this.checkboxState.set(nextState);
+    this.checkboxChange.emit(nextState);
+  }
+
+  // Button:
+  generateClick = output<void>();
+
+  onGenerate() {
+    this.generateClick.emit();
   }
 }

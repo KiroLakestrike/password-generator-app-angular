@@ -18,7 +18,7 @@ button {
         background: $neutral-800;
         outline: $green-200 2px solid;
         color: $green-200;
-
+        cursor: pointer;
         svg {
         fill:$green-200;
     }
@@ -69,7 +69,7 @@ button {
 
 .yellow {
   background-color: $yellow-300;
-  border: 2px $white $yellow-300 solid;
+  border: 2px $yellow-300 solid;
 }
 
 .green {

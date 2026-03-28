@@ -1,28 +1,37 @@
-<form>
-  <app-input-range-slider
+ <app-input-range-slider
     [rangeSlider]="rangeSliderConfig"
     [length]="passwordLength()"
     (lengthChange)="onLengthChange($event)"
   />
-    <div class="checkbox-container">
-@for (checkbox of checkboxes; track trackByCheckboxId($index, checkbox)) {
-  <app-input-checkbox
-    [config]="checkbox"
-    [checked]="getCheckedState(checkbox.name)()"
-    (checkedChange)="toggleCheckbox($event, checkbox.name)">
-  </app-input-checkbox>
-}
 
-</div>
-<div class="strength-container">
-  <span class="first">STRENGTH</span>
-  <span></span>
-  <div class="strength-bars-container">
-    <div class="bars red" id="bar1"></div>
-    <div class="bars white" id="bar2"></div>
-    <div class="bars white" id="bar3"></div>
-    <div class="bars white" id="bar4"></div>
+  <div class="checkbox-container">
+    @for (checkbox of checkboxes; track trackByCheckboxId($index, checkbox)) {
+      <app-input-checkbox
+        [config]="checkbox"
+        [checked]="getCheckedState(checkbox.name)"
+        (checkedChange)="toggleCheckbox($event, checkbox.name)">
+      </app-input-checkbox>
+    }
   </div>
-</div>
-    <button type="submit" id="btn-generate">GENERATE <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/></svg></button>
-</form>
+
+  <div class="strength-container">
+    <span class="first">STRENGTH</span>
+    <span>{{ passwordRating() }}</span>
+    <div class="strength-bars-container">
+      <div class="bars" [class.white]="passwordRating() === ''" [class.red]="passwordRating() === 'TOO WEAK!'" [class.orange]="passwordRating() === 'WEAK'" [class.yellow]="passwordRating() === 'MEDIUM'" [class.green]="passwordRating() === 'STRONG'"></div>
+      <div class="bars" [class.white]="passwordRating() === '' || passwordRating() === 'TOO WEAK!'" [class.orange]="passwordRating() === 'WEAK'" [class.yellow]="passwordRating() === 'MEDIUM'" [class.green]="passwordRating() === 'STRONG'"></div>
+      <div class="bars" [class.white]="passwordRating() === '' || passwordRating() === 'TOO WEAK!' || passwordRating() === 'WEAK'" [class.yellow]="passwordRating() === 'MEDIUM'" [class.green]="passwordRating() === 'STRONG'"></div>
+      <div class="bars" [class.white]="passwordRating() === '' || passwordRating() === 'TOO WEAK!' || passwordRating() === 'WEAK' || passwordRating() === 'MEDIUM'" [class.green]="passwordRating() === 'STRONG'"></div>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    id="btn-generate"
+    (click)="onGenerate()"
+  >
+    GENERATE
+    <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+      <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
+    </svg>
+  </button>
