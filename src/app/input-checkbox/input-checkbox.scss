@@ -1,0 +1,33 @@
+@use '../../colors' as *;
+@use '../../typography' as *;
+
+
+input[type="checkbox"] {
+    appearance:none;
+    font:inherit;
+    width:1.15rem;
+    height: 1.15rem;
+    border: 2px solid $white;
+    transform: translateY(0.5rem);
+    position:relative;
+
+    &:hover {
+        border: 2px solid $green-200;
+    }
+}
+
+input[type="checkbox"]::before{
+    content: '';
+    width: 1.15rem;
+    height: 1.15rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background: $green-200 url('../../../public/icon-check.svg') center center no-repeat;
+    position:absolute;
+    top:-2px;
+    left:-2px;
+}
+
+input[type="checkbox"]:checked::before{
+    transform: scale(1);
+}

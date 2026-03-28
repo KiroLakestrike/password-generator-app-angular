@@ -12,7 +12,7 @@ export class RangeSlider {
 
   rangeSlider: RangeSliderInterface = {
     label: { 
-      text: 'Password Lenght',
+      text: 'Character Lenght',
       location: 'before',  
     },
     name:'password-lenght',

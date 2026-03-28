@@ -40,34 +40,37 @@ button {
         fill:$green-200;
     }
     }
+}
 
-
+.checkbox-container{
+    display:flex;
+    flex-direction:column;
+    gap: $spacer-8;
+    margin:$spacer-32 0;
 }
 
 
+.strength-container{
+    padding:$spacer-16;
+    background-color:$neutral-900;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacer-8;
 
-input[type="checkbox"] {
-    appearance:none;
-    font:inherit;
-    width:1.15rem;
-    height: 1.15rem;
-    border: 2px solid $white;
-    transform: translateY(0.5rem);
-    position:relative;
+    .first {
+     margin-right:auto;   
+    }
 }
 
-input[type="checkbox"]::before{
-    content: '';
-    width: 1.15rem;
-    height: 1.15rem;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    background: $green-200 url('../../../public/icon-check.svg') center center no-repeat;
-    position:absolute;
-    top:-2px;
-    left:-2px;
+.strength-bars-container {
+    display:flex;
+    flex-direction: row;
+    gap:$spacer-8;
 }
 
-input[type="checkbox"]:checked::before{
-    transform: scale(1);
+.bars {
+    height: 1.75rem;
+    width: 0.5rem;
+    border: 2px $white solid;
 }
