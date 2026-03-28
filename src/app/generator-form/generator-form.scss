@@ -1,0 +1,73 @@
+@use '../../colors' as *;
+@use '../../typography' as *;
+
+
+ul {
+    display: flex;
+    flex-direction:column;
+    gap: $spacer-8;
+    padding:0;
+    margin: $spacer-32 0;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+
+
+button {
+    width: 100%;
+    padding: $spacer-16 0;
+    font-family: $font-family;
+    font-weight: 700;
+    background-color: $green-200;
+    border: none;
+
+    svg {
+        fill: $neutral-800;
+    }
+
+    &:hover {
+        background: $neutral-800;
+        outline: $green-200 2px solid;
+        color: $green-200;
+        
+        svg {
+        fill:$green-200;
+    }
+    }
+
+
+}
+
+
+
+input[type="checkbox"] {
+    appearance:none;
+    font:inherit;
+    width:1.15rem;
+    height: 1.15rem;
+    border: 2px solid $white;
+    transform: translateY(0.5rem);
+    position:relative;
+}
+
+input[type="checkbox"]::before{
+    content: '';
+    width: 1.15rem;
+    height: 1.15rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background: $green-200 url('../../../public/icon-check.svg') center center no-repeat;
+    position:absolute;
+    top:-2px;
+    left:-2px;
+}
+
+input[type="checkbox"]:checked::before{
+    transform: scale(1);
+}

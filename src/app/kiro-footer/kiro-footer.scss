@@ -1,0 +1,42 @@
+@use '../../colors' as *;
+@use '../../typography' as *;
+
+
+footer {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+
+    padding:$spacer-12;
+    background-color: $slate-950;
+    color: $amber-700;
+}
+
+a,
+a:visited {
+    color: $amber-700;
+
+    &:hover {
+        color:$amber-400;
+    }
+}
+
+.footer-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.author-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+img {
+    max-height: 4rem;
+}
